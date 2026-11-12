@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14284b">
+<meta name="format-detection" content="telephone=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Agenda DBV 2027">
+<title>Agenda Sugestiva 2027 – DBV AAMAR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&display=swap">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#f2f4f8; --surface:#ffffff; --ink:#14213d; --muted:#5b6578; --line:#d9deea;
+  --navy:#14284b; --gold:#c98f00; --formacao:#1d4f9c; --concurso:#b3261e; --evento:#8a6100;
+  --pend-bg:#fff6dd; --pend-line:#e3c56a;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1626; --surface:#18223a; --ink:#e8ecf6; --muted:#9aa5bd; --line:#2a3656;
+    --navy:#0b1220; --gold:#f0b429; --formacao:#6ea2ee; --concurso:#ff8a80; --evento:#f0b429;
+    --pend-bg:#2b2511; --pend-line:#6d5a1c; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1626; --surface:#18223a; --ink:#e8ecf6; --muted:#9aa5bd; --line:#2a3656;
+  --navy:#0b1220; --gold:#f0b429; --formacao:#6ea2ee; --concurso:#ff8a80; --evento:#f0b429;
+  --pend-bg:#2b2511; --pend-line:#6d5a1c; color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Archivo","Segoe UI",Roboto,Arial,sans-serif;font-size:16px;line-height:1.5}
+header{background:var(--navy);color:#fff;padding:40px 20px 32px;border-bottom:6px solid var(--gold)}
+.wrap{max-width:860px;margin:0 auto}
+header p{margin:0;opacity:.8;font-size:.95rem}
+header h1{margin:6px 0 4px;font-size:clamp(2rem,7vw,3.4rem);line-height:1.05;font-weight:800;font-stretch:80%;letter-spacing:-.01em}
+.next{margin-top:22px;background:rgba(255,255,255,.1);border-left:4px solid var(--gold);padding:12px 16px;border-radius:0 8px 8px 0}
+.next b{display:block;font-size:1.05rem}
+.next span{font-size:.9rem;opacity:.85}
+main{padding:24px 20px 96px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.filters button{font:inherit;font-size:.9rem;font-weight:600;color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.filters button:focus-visible,.theme:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.month{display:grid;grid-template-columns:110px 1fr;gap:12px 20px;padding:18px 0;border-top:1px solid var(--line)}
+.month h2{margin:0;font-size:1.5rem;font-weight:800;font-stretch:80%;color:var(--ink);line-height:1.1}
+.events{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.ev{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--cor);border-radius:8px;padding:12px 16px}
+.ev .d{font-weight:700;font-size:.95rem;color:var(--cor)}
+.ev .t{font-weight:600;margin-top:2px}
+.ev .n{font-size:.85rem;color:var(--muted);margin-top:2px}
+.formacao{--cor:var(--formacao)} .concurso{--cor:var(--concurso)} .evento{--cor:var(--evento)}
+.ev.big{border-width:1px 1px 1px 6px;box-shadow:inset 0 0 0 1px var(--cor)}
+.pend{margin-top:20px;background:var(--pend-bg);border:1.5px dashed var(--pend-line);border-radius:10px;padding:16px 20px}
+.pend h2{margin:0 0 6px;font-size:1.15rem}
+.pend ul{margin:0;padding-left:20px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.85rem;color:var(--muted);margin:0 0 20px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.theme{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));font:inherit;font-size:.85rem;background:var(--surface);color:var(--ink);border:1.5px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer}
+.empty{color:var(--muted);padding:20px 0}
+.tabs{display:flex;gap:6px;padding-top:14px;padding-left:20px;padding-right:20px}
+.tabs button{font:inherit;font-weight:700;font-size:1rem;color:var(--muted);background:none;border:0;border-bottom:4px solid transparent;padding:8px 14px;cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--gold)}
+.tabs button:focus-visible,.search:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+[hidden]{display:none!important}
+.search{font:inherit;font-size:16px;-webkit-appearance:none;appearance:none;width:100%;max-width:360px;margin-bottom:14px;padding:9px 14px;border:1.5px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink)}
+.ativ{--cor:var(--formacao)} .uno{--cor:var(--evento)} .feriado{--cor:var(--muted)}
+.feriado{background:transparent}
+.dbv{--cor:var(--concurso)}
+.avt{--cor:#0f766e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .avt{--cor:#5eead4}}
+:root[data-theme="dark"] .avt{--cor:#5eead4}
+@media (max-width:620px){.month{grid-template-columns:1fr}.month h2{font-size:1.3rem}}
+.filters button,.tabs button,.theme{min-height:44px}
+.tabs{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tabs button{white-space:nowrap}
+@media print{.filters,.theme{display:none}.ev{break-inside:avoid}header{border:0}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <p id="h-top">Associação Amazonas Roraima · MDA/MJ</p>
+    <h1 id="h-title">Agenda sugestiva 2027</h1>
+    <p id="h-sub">Coordenação Geral</p>
+    <div class="next" id="next" aria-live="polite"></div>
+  </div>
+</header>
+<nav class="wrap tabs" role="tablist" aria-label="Agendas">
+  <button role="tab" id="t-dbv" aria-selected="true" data-p="desbravadores">DBV/AM</button>
+  <button role="tab" id="t-avt" aria-selected="false" data-p="avt">AVT/AM</button>
+  <button role="tab" id="t-aamar" aria-selected="false" data-p="aamar">AAmaR</button>
+</nav>
+<main class="wrap">
+  <section id="p-dbv" role="tabpanel" aria-labelledby="t-dbv">
+  <div class="filters" role="group" aria-label="Filtrar por tipo">
+    <button data-f="todos" aria-pressed="true">Todos</button>
+    <button data-f="formacao" aria-pressed="false">Formação</button>
+    <button data-f="concurso" aria-pressed="false">Concursos e provas</button>
+    <button data-f="evento" aria-pressed="false">Eventos</button>
+  </div>
+  <p class="legend">
+    <span><i style="background:var(--formacao)"></i>Formação: treinamentos, cursos, cartão virtual</span>
+    <span><i style="background:var(--concurso)"></i>Concursos e provas</span>
+    <span><i style="background:var(--evento)"></i>Eventos</span>
+  </p>
+  <div id="agenda"></div>
+  <section class="pend" id="pend" aria-label="Datas a definir">
+    <h2>Datas a definir</h2>
+    <ul>
+      <li>Treinamento WEB SGC para Regionais</li>
+      <li>Treinamento WEB SGC para Distritais</li>
+      <li>Treinamento Avançado para Diretoria (TAD)</li>
+      <li>Curso para Líder Máster</li>
+      <li>Curso para Líder Máster Avançado</li>
+    </ul>
+  </section>
+  </section>
+  <section id="p-aamar" role="tabpanel" aria-labelledby="t-aamar" hidden>
+    <input class="search" id="q" type="search" placeholder="Buscar atividade ou mês" aria-label="Buscar atividade ou mês">
+    <div class="filters" role="group" aria-label="Filtrar por tipo">
+      <button data-f="todos" aria-pressed="true">Todos</button>
+      <button data-f="ativ" aria-pressed="false">Igreja Local e AAmaR</button>
+      <button data-f="uno" aria-pressed="false">Só UNoB/AAmaR</button>
+      <button data-f="dbv" aria-pressed="false">DBV/AM</button>
+      <button data-f="avt" aria-pressed="false">AVT/AM</button>
+      <button data-f="feriado" aria-pressed="false">Feriados</button>
+    </div>
+    <div id="agenda2"></div>
+  </section>
+  <section id="p-avt" role="tabpanel" aria-labelledby="t-avt" hidden>
+    <div class="filters" role="group" aria-label="Filtrar por tipo">
+      <button data-f="todos" aria-pressed="true">Todos</button>
+      <button data-f="formacao" aria-pressed="false">Formação</button>
+      <button data-f="concurso" aria-pressed="false">Concursos e provas</button>
+      <button data-f="evento" aria-pressed="false">Eventos</button>
+    </div>
+    <div id="agenda3"></div>
+  </section>
+</main>
+<button class="theme" id="theme" type="button">Tema</button>
+<script>
+var EV=[
+ {s:"2027-02-10",e:"2027-06-30",t:"Curso para Conselheiros (4 horas)",c:"formacao",n:"Pelo SGC, de 10/02 a 30/06"},
+ {s:"2027-02-13",e:"2027-02-14",t:"Treinamento Básico para Diretoria (TBD)",c:"formacao"},
+ {s:"2027-02-20",t:"Treinamento WEB SGC para Diretoria de Clube",c:"formacao"},
+ {s:"2027-03-06",e:"2027-03-07",t:"Seminário para Liderança (10 horas)",c:"formacao"},
+ {s:"2027-03-07",t:"Abertura da Fábrica de Líderes (Região)",c:"formacao"},
+ {s:"2027-03-28",t:"DBV por 1 Dia",c:"evento",n:"Data a confirmar"},
+ {s:"2027-04-01",e:"2027-04-11",t:"Concursos Espirituais: fase Clube",c:"concurso"},
+ {s:"2027-04-03",t:"1ª Bateria de Provas",c:"concurso"},
+ {s:"2027-04-12",e:"2027-05-02",t:"Concursos Espirituais: fase Distrito",c:"concurso"},
+ {s:"2027-05-01",t:"2ª Bateria de Provas",c:"concurso"},
+ {s:"2027-05-03",e:"2027-05-23",t:"Concursos Espirituais: fase Região",c:"concurso"},
+ {s:"2027-06-01",e:"2027-06-13",t:"Entrega do Cartão Virtual: Líder Máster e Avançado",c:"formacao"},
+ {s:"2027-06-01",e:"2027-06-30",t:"Concurso de Ordem Unida: fase Região",c:"concurso"},
+ {s:"2027-06-05",t:"3ª Bateria de Provas",c:"concurso"},
+ {s:"2027-07-31",e:"2027-08-07",t:"Entrega do Cartão Virtual: Líder",c:"formacao"},
+ {s:"2027-09-18",t:"Dia Mundial dos DBV",c:"evento",big:1},
+ {s:"2027-10-08",e:"2027-10-11",t:"VI ACAMP ESCOLA",c:"evento"},
+ {s:"2027-10-29",e:"2027-11-02",t:"IX Camporí de DBV: “Rumo à Eternidade”",c:"evento",big:1}
+];
+var MES=["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+var MS=["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
+var DS=["dom","seg","ter","qua","qui","sex","sáb"];
+function P(s){var a=s.split("-");return new Date(+a[0],+a[1]-1,+a[2])}
+function p2(n){return (n<10?"0":"")+n}
+function fmt(ev){
+  var a=P(ev.s),b=ev.e?P(ev.e):null;
+  if(!b)return DS[a.getDay()]+", "+p2(a.getDate())+" "+MS[a.getMonth()];
+  var same=a.getMonth()===b.getMonth();
+  var days=Math.round((b-a)/864e5);
+  if(same&&days===1)return p2(a.getDate())+" e "+p2(b.getDate())+" "+MS[a.getMonth()]+" ("+DS[a.getDay()]+"–"+DS[b.getDay()]+")";
+  if(same)return p2(a.getDate())+" a "+p2(b.getDate())+" "+MS[a.getMonth()];
+  return p2(a.getDate())+" "+MS[a.getMonth()]+" a "+p2(b.getDate())+" "+MS[b.getMonth()];
+}
+var filtro="todos";
+function render(){
+  var root=document.getElementById("agenda"),html="",any=false;
+  for(var m=0;m<12;m++){
+    var list=EV.filter(function(e){return P(e.s).getMonth()===m&&(filtro==="todos"||e.c===filtro)});
+    if(!list.length)continue;
+    any=true;
+    html+='<section class="month"><h2>'+MES[m]+'</h2><ul class="events">';
+    list.forEach(function(e){
+      html+='<li class="ev '+e.c+(e.big?' big':'')+'"><div class="d">'+fmt(e)+'</div><div class="t">'+e.t+'</div>'+(e.n?'<div class="n">'+e.n+'</div>':'')+'</li>';
+    });
+    html+='</ul></section>';
+  }
+  root.innerHTML=any?html:'<p class="empty">Nenhuma ação neste tipo.</p>';
+  document.getElementById("pend").style.display=(filtro==="todos"||filtro==="formacao")?"":"none";
+}
+function proximo(){
+  var hoje=new Date();hoje=new Date(hoje.getFullYear(),hoje.getMonth(),hoje.getDate());
+  var box=document.getElementById("next"),f=null;
+  for(var i=0;i<EV.length;i++){var fim=P(EV[i].e||EV[i].s);if(fim>=hoje){f=EV[i];break}}
+  if(!f){box.style.display="none";return}
+  var ini=P(f.s),d=Math.round((ini-hoje)/864e5);
+  var txt=d>0?"em "+d+(d===1?" dia":" dias"):"em andamento";
+  box.innerHTML='<span>Próxima ação</span><b>'+f.t+'</b><span>'+fmt(f)+' · '+txt+'</span>';
+}
+document.querySelectorAll("#p-dbv .filters button").forEach(function(b){
+  b.addEventListener("click",function(){
+    filtro=b.getAttribute("data-f");
+    document.querySelectorAll("#p-dbv .filters button").forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});
+    render();
+  });
+});
+document.getElementById("theme").addEventListener("click",function(){
+  var r=document.documentElement,dark=getComputedStyle(r).colorScheme==="dark";
+  r.setAttribute("data-theme",dark?"light":"dark");
+});
+render();proximo();
+var CAL=[["Janeiro","01","FERIADO","Feriado Nacional"],["Janeiro","Sáb. 02","Sábado Missionário","Sábado Missionário"],["Janeiro","Sáb. 09","Sábado – Igreja Local","Sábado – Igreja Local"],["Janeiro","12–17","VI Campori Sul-Americano de DBV (edição Ômega) em Barretos, SP","VI Campori Sul-Americano de DBV"],["Janeiro","Sáb. 16","Sábado de Mordomia","Sábado de Mordomia"],["Janeiro","19–22","—","Concílio Ministerial AAmaR"],["Janeiro","Sáb. 23","IDE Manaus","IDE Manaus"],["Janeiro","24","IDE Itacoatiara","IDE Itacoatiara"],["Janeiro","Sáb. 30","IDE Boa Vista / Igreja Acolhedora","IDE Boa Vista / Igreja Acolhedora"],["Janeiro","31","IDE Rorainópolis","IDE Rorainópolis"],["Fevereiro","05–09","Retiro Espiritual / Campal Uaicurapá, Urucará e Au-Au (Boa Vista)","Retiro Espiritual"],["Fevereiro","Sáb. 06","Sábado Missionário","Sábado Missionário"],["Fevereiro","11","—","Comissão Diretiva UNoB"],["Fevereiro","Sáb. 13","Sábado de Mordomia / IDE Parintins","Sábado de Mordomia / IDE Parintins"],["Fevereiro","14","IDE Barreirinha","IDE Barreirinha"],["Fevereiro","18–27","10 Dias de Clamor","10 Dias de Clamor"],["Fevereiro","Sáb. 20","10 Dias de Clamor","10 Dias de Clamor"],["Fevereiro","Sáb. 27","Celebração Reencontro","Celebração Reencontro"],["Março","03–04","—","Reunião Administrativa e Avaliação PE – AAmaR"],["Março","Sáb. 06","Sábado Missionário / Consagração - Duplas Missionárias / Semana Santa","Sábado Missionário / Consagração Duplas Missionárias"],["Março","07","Início dos Lares de Esperança","Trimestral - Manaus"],["Março","Sáb. 13","Sábado de Mordomia","Sábado de Mordomia"],["Março","14","Trimestral - Boa Vista","Trimestral - Boa Vista"],["Março","17","—","Comissão Diretiva UNoB"],["Março","Sáb. 20","Dia Mundial do Jovem Adventista","Dia Mundial do Jovem Adventista"],["Março","20–27","Evangelismo de Semana Santa","Evangelismo de Semana Santa"],["Março","26","FERIADO","Feriado"],["Março","Sáb. 27","Evangelismo de Semana Santa","Evangelismo de Semana Santa"],["Abril","Sáb. 03","Sábado de Mordomia – Início 21 Dias de Consagração / Classe Crescendo em Cristo / Curso de Noivos - RR","Sábado de Mordomia / Início 21 Dias de Consagração"],["Abril","04","Domingos Proféticos","Domingos Proféticos"],["Abril","Sáb. 10","Sábado Missionário / Curso de Noivos - AM","Sábado Missionário / Curso de Noivos - AM"],["Abril","Sáb. 17","Sábado – Igreja Local","Sábado – Igreja Local"],["Abril","19","—","Comissão Diretiva UNoB"],["Abril","21","FERIADO (Tiradentes)","Feriado Nacional (Tiradentes)"],["Abril","21–24","Meia Semana de Mordomia","Meia Semana de Mordomia"],["Abril","Sáb. 24","Lançamento Super Missionários / Encerramento 21 Dias (Festa das Primícias)","Lançamento Super Missionários / Festa das Primícias"],["Abril","25","Início Classes Bíblicas – AVT/DBV","Início Classes Bíblicas – AVT/DBV"],["Maio","Sáb. 01","Sábado Missionário / Lançamento Inscrições Calebe","Sábado Missionário / Lançamento Inscrições Calebe"],["Maio","03–06","—","I Concílio de Aspirantes UNoB"],["Maio","Sáb. 08","Sábado de Mordomia","Sábado de Mordomia"],["Maio","09","DIA DAS MÃES","Dia das Mães"],["Maio","Sáb. 15","Sábado da Criança e Dia Mundial do Aventureiro","Sábado da Criança e Dia Mundial do Aventureiro"],["Maio","16–20","—","Concílio Ministerial AAmaR"],["Maio","Sáb. 22","Encontro de Ancionato – Boa Vista","Encontro de Ancionato – Boa Vista"],["Maio","23","Encontro de Ancionato - Rorainópolis","Encontro de Ancionato - Rorainópolis"],["Maio","27","FERIADO (Corpus Christi)","Feriado Nacional (Corpus Christi)"],["Maio","Sáb. 29","Sábado – Igreja Local / Consagração Calebe (Tarde)","Consagração Calebe (Tarde)"],["Maio","30–03/06","—","Avaliações do PE, Reuniões Administrativas, Conselhos e Plenária UNoB"],["Junho","Sáb. 05","Sábado Missionário da Mulher Adventista","Sábado Missionário da Mulher Adventista"],["Junho","11–13","Fim de Semana da Família","Fim de Semana da Família"],["Junho","11–14","Campal Massauari – Barreirinha II","Campal Massauari – Barreirinha II"],["Junho","Sáb. 12","Encontro de Ancionato - Manaus","Encontro de Ancionato - Manaus"],["Junho","13","Encontro de Ancionato – Itacoatiara / Trimestral - MCA","Trimestral - MCA"],["Junho","Sáb. 19","Sábado de Mordomia","Sábado de Mordomia"],["Junho","20","Início Evangelismo Missão Calebe e Escola Cristã de Férias","Início Evangelismo Calebe e Escola Cristã de Férias"],["Junho","23","—","Comissão Diretiva UNoB"],["Junho","Sáb. 26","Dia do Ancionato","Dia do Ancionato"],["Julho","01","Evangelismo Calebe e Escola Cristã de Férias","Evangelismo Calebe e ECF"],["Julho","Sáb. 03","Sábado Missionário","Sábado Missionário"],["Julho","Sáb. 10","Dia do Colportor","Dia do Colportor"],["Julho","14","—","Comissão Diretiva UNoB"],["Julho","Sáb. 17","Sábado de Mordomia","Sábado de Mordomia"],["Julho","18","Encerramento Calebe","Encerramento Calebe"],["Julho","Sáb. 24","Semana de Oração JA","Semana de Oração JA"],["Julho","Sáb. 31","Semana de Oração JA","Semana de Oração JA"],["Agosto","01–05","—","Concílio de Administradores DSA (Foz do Iguaçu)"],["Agosto","05–08","—","Concílio de Administradores e Família - UNoB"],["Agosto","05–07","Campal Monte Horebe – BVR","Campal Monte Horebe – BVR"],["Agosto","Sáb. 07","Sábado Missionário (Dia da ASA) / Classe Crescendo em Cristo","Sábado Missionário (Dia da ASA)"],["Agosto","08","DIA DOS PAIS","Dia dos Pais"],["Agosto","Sáb. 14","Sábado de Mordomia","Sábado de Mordomia"],["Agosto","18","—","Comissão Diretiva UNoB"],["Agosto","Sáb. 21","Projeto “Quebrando o Silêncio”","Projeto “Quebrando o Silêncio”"],["Agosto","22–26","—","CADE - UNoB"],["Agosto","26–29","Campal Tucumanduba – Barreirinha I","Campal Tucumanduba – Barreirinha I"],["Agosto","27–30","—","Educação – I Will Go Teen UNoB"],["Agosto","Sáb. 28","Sábado – Igreja Local","Sábado – Igreja Local"],["Agosto","29","Dia “D” – Projeto Maná","Dia “D” – Projeto Maná"],["Setembro","01–30","Evangelismo One Voice (Feminino e Pastoral)","Evangelismo One Voice"],["Setembro","Sáb. 04","Sábado Missionário","Sábado Missionário"],["Setembro","07","FERIADO (Independência do Brasil)","Feriado Nacional (Independência)"],["Setembro","Sáb. 11","Impacto Esperança","Impacto Esperança"],["Setembro","12","Trimestral – MCA (Distrital)","Trimestral – MCA (Distrital)"],["Setembro","15","—","Comissão Diretiva UNoB"],["Setembro","17–19","OneVoice","OneVoice"],["Setembro","Sáb. 18","Dia Mundial do Desbravador / Dia do Adolescente","Dia Mundial do Desbravador / Dia do Adolescente"],["Setembro","18–25","Semana da Esperança","Semana da Esperança"],["Setembro","Sáb. 25","Batismo da Primavera / Celebração Super Missionários","Batismo da Primavera / Celebração Super Missionários"],["Outubro","Sáb. 02","Sábado da Educação Adventista / Classe Crescendo em Cristo","Sábado da Educação Adventista"],["Outubro","03","Domingos Proféticos","Domingos Proféticos"],["Outubro","08–12","Campal Sul de Roraima","Campal Sul de Roraima"],["Outubro","Sáb. 09","Aniversário da Escola Sabatina Viva / Curso de Noivos - RR","Aniversário Escola Sabatina Viva / Curso Noivos RR"],["Outubro","12","FERIADO","Feriado Nacional"],["Outubro","Sáb. 16","Sábado de Mordomia – Início 21 Dias de Consagração","Sábado de Mordomia / Início 21 Dias Consagração"],["Outubro","20","—","Comissão Diretiva UNoB"],["Outubro","Sáb. 23","Sábado da Criação / Curso de Noivos - AM","Sábado da Criação / Curso Noivos AM"],["Outubro","29–02/11","Campori – Rumo à Eternidade","Campori – Rumo à Eternidade"],["Outubro","Sáb. 30","Dia do Pastor e das Vocações Ministeriais","Dia do Pastor e Vocações Ministeriais"],["Novembro","02","FERIADO / Campori – Rumo à Eternidade","Feriado Nacional / Campori"],["Novembro","Sáb. 06","Dia do Espírito de Profecia / Encerramento 21 Dias (Festa das Primícias)","Dia do Espírito de Profecia / Festa das Primícias"],["Novembro","Sáb. 13","Encontro Ancionato/Cônjuges (Parintins) / Comunicadores Manaus / Congresso MM - AM","Encontro Ancionato Parintins / Congresso MM"],["Novembro","14","Encontro Ancionato/Cônjuges (Barreirinha) / Trimestral MCA - RR","Trimestral MCA - RR"],["Novembro","15","FERIADO (Proclamação da República)","Feriado Nacional (Proclamação da República)"],["Novembro","Sáb. 20","Sábado de Mordomia / Encontro Ancionato (Manaus) / Comunicadores Boa Vista","Sábado de Mordomia / Encontro Ancionato Manaus"],["Novembro","21","Encontro Ancionato (Itacoatiara) / Trimestral MCA - AM","Trimestral MCA - AM"],["Novembro","21–25","—","Avaliações PE, Reuniões Administrativas, Conselhos e Concílio Anual UNoB"],["Novembro","Sáb. 27","Encontro de Ancionato e Cônjuges – Boa Vista","Encontro de Ancionato e Cônjuges – Boa Vista"],["Novembro","28","Encontro de Ancionato e Cônjuges - Rorainópolis","Encontro de Ancionato e Cônjuges - Rorainópolis"],["Dezembro","Sáb. 04","Sábado Missionário / Celebra MDA e MJ - AM","Sábado Missionário / Celebra MDA e MJ - AM"],["Dezembro","05","Celebra MDA e MJ - RR","Celebra MDA e MJ - RR"],["Dezembro","07","—","Comissão Diretiva UNoB"],["Dezembro","08","—","Concílio Anual – AAmaR"],["Dezembro","Sáb. 11","Sábado de Mordomia / IDE Boa Vista","Sábado de Mordomia / IDE Boa Vista"],["Dezembro","12","IDE Rorainópolis","IDE Rorainópolis"],["Dezembro","Sáb. 18","Programa “Mutirão de Natal” / IDE Parintins","Programa “Mutirão de Natal” / IDE Parintins"],["Dezembro","19","IDE Barreirinha","IDE Barreirinha"],["Dezembro","20","Férias Pastorais","Férias Pastorais"],["Dezembro","Sáb. 25","Sábado – Igreja Local / FERIADO (Natal)","Sábado – Igreja Local / Natal"]];
+var MI={};MES.forEach(function(n,i){MI[n]=i});
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function fmtA(m,d){
+  var i=MI[m],pp=d.split("–");
+  if(pp.length===2){
+    if(pp[1].indexOf("/")>-1)return pp[0]+"/"+p2(i+1)+" a "+pp[1];
+    return pp[0]+" a "+pp[1];
+  }
+  if(/^\d+$/.test(d))return DS[new Date(2027,i,+d).getDay()]+", "+d;
+  return d;
+}
+var AV=[
+[0,1,"01 a 31 jan","Cadastro e Recadastro de Clubes, Regionais e Distritais","evento"],
+[0,30,"","Treinamento Web para Regionais e Distritais (MDA)","formacao"],
+[1,3,"","Treinamento Web para Diretores e Secretários(as) de Clubes (MDA)","formacao"],
+[1,14,"","TBDR: Treinamento Básico para Distritais e Regionais AVT","formacao"],
+[1,21,"21 e 28 fev (dom)","TBDA: Treinamento Básico para Diretoria de AVT","formacao"],
+[2,1,"01 a 31 mar","AVT por 1 Dia","evento"],
+[2,6,"","Treinamento Web para Tesoureiros (MDA)","formacao"],
+[2,6,"","Lançamento do Livro do Ano, Ano Bíblico e AVT Fiel","evento"],
+[2,6,"06 mar a 30 out","Projeto da UNoB para Clubes de AVT","evento","Data sugestiva"],
+[2,27,"","Treinamento Web para Conselheiros (MDA)","formacao"],
+[3,1,"01 a 30 abr","Abertura: Fábrica de Líderes AVT AM","formacao"],
+[3,10,"","Treinamento Web SGC para Cartão Virtual (Fábrica de Líderes)","formacao"],
+[3,18,"","1ª Bateria de Provas de Líderes de AVT (AM/RR)","concurso"],
+[3,25,"","Lançamento da Classe Bíblica MDA/AVT (AM/RR)","evento"],
+[4,1,"01 a 31 mai","Concursos Espirituais: fase Clube (AVT AM)","concurso"],
+[4,9,"09 a 15 mai","Semana do Lenço (AVT AM/RR)","evento"],
+[4,15,"","Dia da Criança Adventista e Dia Mundial dos Aventureiros (AM/RR)","evento"],
+[5,6,"","Encontro de RFA: AVT AM (AAmaR)","evento"],
+[5,20,"","Início da Missão Calebe (MJ/MDA)","evento"],
+[6,18,"","Encerramento da Missão Calebe (MJ/MDA)","evento"],
+[7,1,"01 a 31 ago","Concursos Espirituais: fase Distrital (AVT AM)","concurso"],
+[7,15,"","2ª Bateria de Provas AVT","concurso"],
+[8,1,"01 a 30 set","Concursos Espirituais: fase Regional (AVT AM)","concurso"],
+[8,25,"","Batismo da Primavera (MJ/MDA AM/RR)","evento"],
+[9,3,"","3ª Bateria de Provas AVT (AM/RR)","concurso"],
+[9,17,"","Dia da Alegria AAmaR: AVT AM","evento"],
+[9,24,"","Entrega do Cartão Virtual (AVT AM)","formacao"],
+[10,7,"","Encerramento das Atividades dos Clubes (AVT AM/RR)","evento"]
+];
+var ALL=CAL.map(function(r){return [r[0],r[1],r[2],r[3],parseInt(r[1].replace(/\D*(\d+).*/,"$1"),10)]}).concat(EV.map(function(e){var a=P(e.s);return [MES[a.getMonth()],"",e.t,e.t,a.getDate(),1,fmt(e),e.n||""]})).concat(AV.map(function(r){return [MES[r[0]],"",r[3],r[3],r[1],2,r[2]||(DS[new Date(2027,r[0],r[1]).getDay()]+", "+p2(r[1])+" "+MS[r[0]]),r[5]||""]}));
+ALL.sort(function(a,b){return MI[a[0]]-MI[b[0]]||a[4]-b[4]});
+var fA="todos",qA="";
+function renderA(){
+  var html="",any=false,q=qA.toLowerCase();
+  MES.forEach(function(mn){
+    var out="";
+    ALL.forEach(function(r){
+      if(r[0]!==mn)return;
+      var dbv=!!r[5],ig=r[2],un=r[3],hol=!dbv&&/^feriado/i.test(ig),solo=!dbv&&ig==="—";
+      var cls=dbv?(r[5]===2?"avt":"dbv"):hol?"feriado":solo?"uno":"ativ";
+      var title=solo?un:ig;
+      var note=dbv?(r[5]===2?"AVT/AM":"DBV/AM")+(r[7]?": "+r[7].toLowerCase():""):(!hol&&!solo&&un!==ig)?"UNoB/AAmaR: "+un:(solo?"Só UNoB/AAmaR":"");
+      var d=dbv?r[6]:fmtA(mn,r[1]);
+      if(fA!=="todos"&&cls!==fA)return;
+      if(q&&(mn+" "+d+" "+ig+" "+un).toLowerCase().indexOf(q)<0)return;
+      out+='<li class="ev '+cls+'"><div class="d">'+esc(d)+'</div><div class="t">'+esc(title)+'</div>'+(note?'<div class="n">'+esc(note)+'</div>':'')+'</li>';
+    });
+    if(out){any=true;html+='<section class="month"><h2>'+mn+'</h2><ul class="events">'+out+'</ul></section>'}
+  });
+  document.getElementById("agenda2").innerHTML=any?html:'<p class="empty">Nada encontrado.</p>';
+}
+document.querySelectorAll("#p-aamar .filters button").forEach(function(b){
+  b.addEventListener("click",function(){
+    fA=b.getAttribute("data-f");
+    document.querySelectorAll("#p-aamar .filters button").forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});
+    renderA();
+  });
+});
+document.getElementById("q").addEventListener("input",function(e){qA=e.target.value;renderA()});
+var fV="todos";
+function renderV(){
+  var html="",any=false;
+  for(var m=0;m<12;m++){
+    var out="";
+    AV.forEach(function(r){
+      if(r[0]!==m||(fV!=="todos"&&r[4]!==fV))return;
+      var d=r[2]||(DS[new Date(2027,m,r[1]).getDay()]+", "+p2(r[1])+" "+MS[m]);
+      out+='<li class="ev '+r[4]+'"><div class="d">'+d+'</div><div class="t">'+esc(r[3])+'</div>'+(r[5]?'<div class="n">'+r[5]+'</div>':'')+'</li>';
+    });
+    if(out){any=true;html+='<section class="month"><h2>'+MES[m]+'</h2><ul class="events">'+out+'</ul></section>'}
+  }
+  document.getElementById("agenda3").innerHTML=any?html:'<p class="empty">Nenhuma ação neste tipo.</p>';
+}
+document.querySelectorAll("#p-avt .filters button").forEach(function(b){
+  b.addEventListener("click",function(){
+    fV=b.getAttribute("data-f");
+    document.querySelectorAll("#p-avt .filters button").forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});
+    renderV();
+  });
+});
+var TXT={
+  desbravadores:["Associação Amazonas Roraima · MDA/MJ","Agenda sugestiva 2027","Coordenação Geral"],
+  avt:["Associação Amazonas Roraima · Ministério de Aventureiros","Calendário AVT/AM 2027","Aventureiros (AVT) do Amazonas"],
+  aamar:["Associação Amazonas Roraima","Calendário base AAmaR 2027","Planejamento anual da Igreja Local e da UNoB/AAmaR"]
+};
+var NAMES=["desbravadores","aamar","avt"];
+function fromHash(){var n=location.hash.slice(1);return NAMES.indexOf(n)>-1?n:"desbravadores"}
+var cur=fromHash();
+function show(n){cur=n;try{location.hash=n}catch(e){}tab()}
+function tab(){
+  var ids={desbravadores:["p-dbv","t-dbv"],aamar:["p-aamar","t-aamar"],avt:["p-avt","t-avt"]};
+  NAMES.forEach(function(n){
+    var on=n===cur;
+    document.getElementById(ids[n][0]).hidden=!on;
+    document.getElementById(ids[n][1]).setAttribute("aria-selected",on?"true":"false");
+  });
+  var t=TXT[cur];
+  document.getElementById("h-top").textContent=t[0];
+  document.getElementById("h-title").textContent=t[1];
+  document.getElementById("h-sub").textContent=t[2];
+  document.getElementById("next").style.display=cur==="desbravadores"?"":"none";
+  if(cur==="aamar")renderA();else if(cur==="avt")renderV();else proximo();
+}
+document.querySelectorAll(".tabs button").forEach(function(b){
+  b.addEventListener("click",function(){show(b.getAttribute("data-p"))});
+});
+window.addEventListener("hashchange",function(){cur=fromHash();tab()});
+tab();
+</script>
+</body>
+</html>
